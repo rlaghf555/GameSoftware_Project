@@ -15,6 +15,7 @@ public:
 	void AddObject(float px,float py,float pz, float sx,float sy,float vx,float vy,int kind);
 	void Shoot(int ShootKey);
 	void DeleteObject(unsigned int id);
+	bool CollisionDetection(object *A, object *B);	//rect & rect Collision
 	int FindEmptyObjectSlot();
 private:
 	Renderer *m_Renderer;

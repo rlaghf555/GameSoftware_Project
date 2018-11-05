@@ -164,6 +164,33 @@ void ScnMgr::DeleteObject(unsigned int id)
 	}
 }
 
+bool ScnMgr::CollisionDetection(object * A, object * B)
+{
+	float A_minX, A_minY, A_maxX,A_maxY;
+	float B_minX, B_minY, B_maxX, B_maxY;
+	float A_sizeX, A_sizeY, B_sizeX, B_sizeY;
+	A->getLocation(&A_minX, &A_minY, nullptr);
+	A->getLocation(&A_maxX, &A_maxY, nullptr);
+	B->getLocation(&B_minX, &B_minY, nullptr);
+	B->getLocation(&B_maxX, &B_maxY, nullptr);
+
+	A->getSize(&A_sizeX, &A_sizeY);
+	B->getSize(&B_sizeX, &B_sizeY);
+	A_minX -= A_sizeX;
+	A_minY -= A_sizeY;
+	A_maxX += A_sizeX;
+	A_maxY += A_sizeY;
+	B_minX -= B_sizeX;
+	B_minY -= B_sizeY;
+	B_maxX += B_sizeX;
+	B_maxY += B_sizeY;
+
+	if (A_minX<B_maxX&&A_maxY<B_minY&&A_maxX>B_minX&&A_minY>B_maxY)
+		return true;
+
+	return false;
+}
+
 int ScnMgr::FindEmptyObjectSlot()
 {
 	for (int i = 0; i < MAX_OBJECTS; ++i) {
